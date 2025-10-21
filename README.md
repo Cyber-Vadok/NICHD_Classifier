@@ -1,25 +1,84 @@
-This is a question classification model that classifies questions into 4 classes according to the grammatical context of the questions. 
+# NICHD_Classifier
 
-How to Run Question Classification Model
+_Automated question-type classification for forensic interviews and trial testimony in child sexual abuse cases._  
+This repository is a **fork** of **USC-Lyon-Lab/question_classification** and adds a simple CLI (`predictor_cli.py`) to run inference from the command line.
 
-Step 1: Download the following model and the script file from our github link: 
-https://github.com/USC-Lyon-Lab/question_classification
-Model file name - question_classfication
-Script file name - predictor.ipynb
+---
 
-Step 2: Make a new folder on your computer and put both of the above files in this folder. 
-Also, place the csv file that needs to be classified in the same folder. 
+## 🚀 Quick start
 
-Step 3: Make sure there is a column named “questions” in the csv file that needs to be classified. Please note, the column text is case sensitive and there should not be any spaces before or after the column name.
+### 0) Clone the repo
+```bash
+git clone https://github.com/Cyber-Vadok/NICHD_Classifier.git
+cd NICHD_Classifier
+```
 
-Step 4: Open visual studio and click on ‘File’->‘Open Folder’ and browse to the above folder. 
-Once opened, we can see all the content of the folder on the left side in Visual Studio.
+### 1) Install **Git LFS** (required to download the model weights)
+GitHub blocks files >100 MB unless they’re served with **Git Large File Storage (LFS)**.  
+Install LFS following the official guide, then enable it for your user:
 
-Step 5: Open the predictor.py file in visual studio by clicking on the file name shown on the left window. 
-In the second cell of the predictory.py file, there is a variable called “file_path”. Update the value of this variable to your csv file name. Eg: if your csv file name is “roberta.csv” then update the value: -
-file_path = “./roberta.csv”
+```bash
+# Install: follow the platform-specific instructions in the site below
+# https://git-lfs.com/
 
-Step 6: Click on the “Run All” button on top to run the script. 
+git lfs install          # run once per user
+git lfs fetch --all      # ensure LFS objects are pulled
+git lfs pull
+```
+> If you skip this step, the model files in `roberta_master2_hf/` will be missing or replaced by small pointer files.
 
-Step 7: Once the script finishes, the csv file will be updated with a new column called ‘predictions’.
+### 2) Create a Python virtual environment (`.venv`)
+**Linux / macOS (bash/zsh):**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
+**Windows (PowerShell):**
+```powershell
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+### 3) Install dependencies
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 4) Run the classifier (CLI)
+Basic usage:
+```bash
+python predictor_cli.py --help
+python predictor_cli.py
+```
+---
+
+## 📁 Repository layout (key files)
+
+- `predictor_cli.py` — Command-line entry point for inference  
+- `roberta_master2_hf/` — Model directory tracked via Git LFS  
+- `requirements.txt` — Python dependencies  
+
+---
+
+## 🔍 Labels
+
+The model classifies questions into four categories consistent with the upstream description (e.g., invitations, WH-questions, option-posing, non-questions). See the original repository for background and context.
+
+---
+
+## 📜 Citation & Credits
+
+- **Upstream project:** USC-Lyon-Lab, _question_classification_. This repository make the model works and adds a CLI.  
+- **This fork:** Cyber-Vadok/NICHD_Classifier.
+
+If you use this code in academic work, please also cite the related research from the upstream and any associated publications.
+
+---
+
+## 📝 License
+
+See the upstream repository licensing details.
+
+---
